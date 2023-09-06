@@ -36,6 +36,7 @@ public class CorridorGenerator : SimpleRandomWalkDungeonGenerator
         {
             corridors[i] = IncreaseCorridorsSizeByOne(corridors[i]);
             floorPositions.UnionWith(corridors[i]);
+            corridor = IncreaseCorridorBrush3by3(corridor);
         }
 
         tilemapVisualizer.PaintFloorTiles(floorPositions);

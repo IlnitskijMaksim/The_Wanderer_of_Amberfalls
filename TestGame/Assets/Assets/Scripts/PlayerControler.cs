@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 speed = new Vector2(50, 50);
+    private Vector2 speed = new Vector2(10, 10);
 
     private void Update()
     {

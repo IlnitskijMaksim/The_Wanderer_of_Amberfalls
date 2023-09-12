@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
 
@@ -23,3 +24,24 @@ public class Player : MonoBehaviour
         rb.velocity = movement * speed;
     }
 }
+
+   /* public int health;
+    public Collider healthCheck;
+    public string tagName;
+    public Text healthDisplay;
+
+
+    private void OnTriggerEnter()
+    {
+        if (healthCheck.gameObject.tag == tagName)
+        {
+            health--;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        healthDisplay.text = "Health: " + health.ToString();
+    }
+}*/
+   

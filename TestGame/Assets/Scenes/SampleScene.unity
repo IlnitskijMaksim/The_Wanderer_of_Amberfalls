@@ -659,6 +659,54 @@ MonoBehaviour:
   playerTag: Player
   detectionRadius: 5
   moveSpeed: 2
+--- !u!114 &136465767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136465762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b0529ebb13117419bf1c2716f0435f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityDamage: 1
+--- !u!58 &136465768
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136465762}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0014582574, y: 0.50374776}
+  serializedVersion: 2
+  m_Radius: 0.2866145
 --- !u!1 &282628973
 GameObject:
   m_ObjectHideFlags: 0
@@ -11909,7 +11957,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12117,6 +12165,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 136465765}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 136465768}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 136465767}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
 --- !u!1 &1591861280
 GameObject:
@@ -12435,6 +12489,8 @@ GameObject:
   - component: {fileID: 1926891349}
   - component: {fileID: 1926891350}
   - component: {fileID: 1926891351}
+  - component: {fileID: 1926891352}
+  - component: {fileID: 1926891353}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -12642,6 +12698,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34801418, y: 0.34801424}
   m_EdgeRadius: 0
+--- !u!114 &1926891352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926891340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3468bb4930d8841aa15644e0895dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+  maxHealth: 30
+--- !u!114 &1926891353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926891340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4d4a206f2d6c4eaf9ef662d4e507b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  playerHealth: {fileID: 1926891352}
 --- !u!1 &1960056178
 GameObject:
   m_ObjectHideFlags: 0
@@ -12724,7 +12808,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

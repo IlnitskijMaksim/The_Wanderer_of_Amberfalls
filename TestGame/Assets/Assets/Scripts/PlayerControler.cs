@@ -25,23 +25,5 @@ public class PlayerController : MonoBehaviour
     }
 }
 
-   /* public int health;
-    public Collider healthCheck;
-    public string tagName;
-    public Text healthDisplay;
-
-
-    private void OnTriggerEnter()
-    {
-        if (healthCheck.gameObject.tag == tagName)
-        {
-            health--;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        healthDisplay.text = "Health: " + health.ToString();
-    }
-}*/
+    
    

@@ -46,4 +46,6 @@ public class EnemyController : MonoBehaviour
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
     }
+
+
 }

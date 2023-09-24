@@ -346,69 +346,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall_bottom_moss_1
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9840e3fe794662542ae35c0a066b7cac
-      internalID: -1343531880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wall_bottom_moss_2
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 721825949d16d3a4c8288576d27174d6
-      internalID: 73150483
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wall_bottom_moss_3
-      rect:
-        serializedVersion: 2
-        x: 432
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 615300264de66934eb1c92d120406293
-      internalID: 477559246
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: wall_bottom_1
       rect:
         serializedVersion: 2
@@ -433,7 +370,7 @@ TextureImporter:
       name: wall_bottom_2
       rect:
         serializedVersion: 2
-        x: 416
+        x: 400
         y: 0
         width: 16
         height: 16
@@ -451,10 +388,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall_bottom_right
+      name: corner_bottom_right
       rect:
         serializedVersion: 2
-        x: 448
+        x: 416
         y: 0
         width: 16
         height: 16
@@ -472,10 +409,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall_bottom_left
+      name: corner_bottom_left
       rect:
         serializedVersion: 2
-        x: 464
+        x: 432
         y: 0
         width: 16
         height: 16
@@ -522,7 +459,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -530,6 +467,69 @@ TextureImporter:
       bones: []
       spriteID: 6276e91376c551c4e8f2ac8b48dc9cfa
       internalID: 243883707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall_inner_corner_down_right
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84fccc851babf5f4d94fe0f70e717c81
+      internalID: -631116392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall_inner_corner_down_left
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e2171575cbbfa40b2a3bb65290d5a1
+      internalID: -361716660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall_full
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: add74fe3333cc1149ac5a36ac7166e52
+      internalID: -1762524584
       vertices: []
       indices: 
       edges: []
@@ -546,22 +546,25 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       background: 1421845170
+      corner_bottom_left: 1292428124
+      corner_bottom_right: 1074107319
       corner_front_left: -150153160
       corner_front_right: -1386921787
       floor_1: -665599923
       wall_bottom_1: -860003834
       wall_bottom_2: 2072295921
-      wall_bottom_left: 1292428124
       wall_bottom_moss_1: -1343531880
       wall_bottom_moss_2: 73150483
       wall_bottom_moss_3: 477559246
-      wall_bottom_right: 1074107319
       wall_front_: 243883707
       wall_front_1: 1240900019
       wall_front_2: -1636527581
       wall_front_moss_1: 238306044
       wall_front_moss_2: -2014798019
       wall_front_moss_3: -1504574496
+      wall_full: -1762524584
+      wall_inner_corner_down_left: -361716660
+      wall_inner_corner_down_right: -631116392
       wall_left: -1715667962
       wall_right: -1849369750
   mipmapLimitGroupName: 

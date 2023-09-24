@@ -18,5 +18,9 @@ public class ToWeapon : MonoBehaviour
 
     }
 
+    public int getDamage()
+    {
+        return damage;
+    }
 
 }

@@ -8,7 +8,7 @@ public class RandomMovement2D : MonoBehaviour
 
     [Range(0, 100)] public float speed;
     [Range(1, 500)] public float walkRadius;
-    public string wallTag = "walls"; // Тег объектов, которые считаются стенами.
+    public string wallTag = "Walls"; // Тег объектов, которые считаются стенами.
 
     private Vector2 randomDestination;
     private bool isMoving = false;
@@ -38,7 +38,20 @@ public class RandomMovement2D : MonoBehaviour
 
     private void SetNewDestination()
     {
-        randomDestination = RandomNavMeshLocation();
+        // Перед установкой новой точки назначения, проверяем, нет ли стены впереди.
+        Vector2 newPosition = RandomNavMeshLocation();
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, newPosition - rb.position, Vector2.Distance(rb.position, newPosition), LayerMask.GetMask(wallTag));
+
+        if (hit.collider == null)
+        {
+            randomDestination = newPosition;
+        }
+        else
+        {
+            // Если есть стена, попробуйте снова через некоторое время.
+            Invoke("SetNewDestination", Random.Range(1f, 3f));
+        }
+
         isMoving = true;
     }
 
@@ -54,8 +67,8 @@ public class RandomMovement2D : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(wallTag))
         {
-            // Если столкнулись с объектом, имеющим тег "walls", то меняем точку назначения.
-            randomDestination = RandomNavMeshLocation();
+            // Если столкнулись с объектом, имеющим тег "Walls", то меняем точку назначения.
+            SetNewDestination();
         }
     }
 }

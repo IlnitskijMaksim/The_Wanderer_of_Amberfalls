@@ -8,7 +8,7 @@ public class ArrowBullet : MonoBehaviour
     public float buletSpeed;
     private Rigidbody2D rb;
     public ToWeapon tw;
-    private int destroy = 1;
+    private int destroy = 3;
     
     private void Start()
     {

@@ -50,12 +50,10 @@ public class test : MonoBehaviour
 
     private void SetNewRandomDestination()
     {
-        // Генерируем случайную точку в радиусе блуждания
-        randomDestination = RandomNavMeshLocation(walkRadius);
-
-        // Проверяем, нет ли стены впереди
+        // Перед установкой новой точки назначения, проверяем, нет ли стены впереди.
+        Vector3 newPosition = RandomNavMeshLocation();
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, randomDestination - transform.position, out hit, Vector3.Distance(transform.position, randomDestination)) &&
+        if (Physics.Raycast(transform.position, newPosition - transform.position, out hit, Vector3.Distance(transform.position, newPosition)) &&
             hit.collider.CompareTag(wallTag))
         {
             // Если есть стена, попробуйте снова через некоторое время.
@@ -63,17 +61,18 @@ public class test : MonoBehaviour
         }
         else
         {
+            randomDestination = newPosition;
             agent.SetDestination(randomDestination);
         }
     }
 
-    private Vector3 RandomNavMeshLocation(float radius)
+    private Vector3 RandomNavMeshLocation()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
         randomDirection += transform.position;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
+        NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
 
         return hit.position;
     }

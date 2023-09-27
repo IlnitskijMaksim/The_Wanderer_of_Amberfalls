@@ -35,25 +35,27 @@ public class test : MonoBehaviour
             isChasing = true;
             agent.SetDestination(player.position);
         }
-        else
+        else if (isChasing)
         {
-            // ≈сли не преследуем игрока, идем в случайную точку
-            if (!isChasing)
-            {
-                if (Vector3.Distance(transform.position, randomDestination) < 0.1f)
-                {
-                    SetNewRandomDestination();
-                }
-            }
+            // ≈сли преследование было активировано, но игрок вышел из радиуса, перейдем в случайное блуждание
+            isChasing = false;
+            SetNewRandomDestination();
+        }
+        else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.1f)
+        {
+            // ≈сли не преследуем игрока и достигли случайной точки назначени€, устанавливаем новую
+            SetNewRandomDestination();
         }
     }
 
     private void SetNewRandomDestination()
     {
-        // ѕеред установкой новой точки назначени€, провер€ем, нет ли стены впереди.
-        Vector3 newPosition = RandomNavMeshLocation();
+        // √енерируем случайную точку в радиусе блуждани€
+        randomDestination = RandomNavMeshLocation(walkRadius);
+
+        // ѕровер€ем, нет ли стены впереди
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, newPosition - transform.position, out hit, Vector3.Distance(transform.position, newPosition)) &&
+        if (Physics.Raycast(transform.position, randomDestination - transform.position, out hit, Vector3.Distance(transform.position, randomDestination)) &&
             hit.collider.CompareTag(wallTag))
         {
             // ≈сли есть стена, попробуйте снова через некоторое врем€.
@@ -61,18 +63,17 @@ public class test : MonoBehaviour
         }
         else
         {
-            randomDestination = newPosition;
             agent.SetDestination(randomDestination);
         }
     }
 
-    private Vector3 RandomNavMeshLocation()
+    private Vector3 RandomNavMeshLocation(float radius)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
+        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
 
         return hit.position;
     }

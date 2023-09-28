@@ -16,7 +16,7 @@ public class Bow : ToWeapon
             if (gObject != null)
             {
                 gObject.GetComponent<ArrowBullet>().tw = this;
-                gObject.GetComponent<ArrowBullet>().buletSpeed = buletSpeed_1;
+                gObject.GetComponent<ArrowBullet>().bulletSpeed = buletSpeed_1;
             }
             timeFire = fireRate;
         }

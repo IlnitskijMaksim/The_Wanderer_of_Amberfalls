@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ArrowBullet : MonoBehaviour
 {
-    public float buletSpeed;
+    public float bulletSpeed;
     private Rigidbody2D rb;
     public ToWeapon tw;
     private int destroy = 3;
@@ -13,7 +13,18 @@ public class ArrowBullet : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right*buletSpeed;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - transform.position).normalized;
+        Vector2 directionOther = (direction * 1000).normalized;
+
+        rb.velocity = directionOther * bulletSpeed;
+        Debug.Log(mousePosition + " " + transform.position + " " + rb.velocity + " " + direction + " " + directionOther);
+
+        // Вычисляем угол поворота пули
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+
         Invoke("DestroyTime", destroy);
     }
 
@@ -24,12 +35,14 @@ public class ArrowBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        EntityStats enemy = other.GetComponent<EntityStats>();
-        if (enemy != null)
+        if (!other.gameObject.CompareTag("Player"))
         {
-            enemy.GiveDamage(tw.getDamage());
-        }
-        Destroy(gameObject);
+            EntityStats enemy = other.GetComponent<EntityStats>();
+            if (enemy != null)
+            {
+                enemy.GiveDamage(tw.getDamage());
+            }
+            Destroy(gameObject);
+        }       
     }
-
 }

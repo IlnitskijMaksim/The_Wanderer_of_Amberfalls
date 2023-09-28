@@ -12,6 +12,12 @@ public class Bow : ToWeapon
     {
         if (timeFire <= 0)
         {
+            // ѕолучите позицию курсора мыши в мировых координатах
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // Ќаправьте пулю в направлении позиции курсора мыши
+            Vector3 shootDirection = (mousePosition - firePoint.position).normalized;
+
             GameObject gObject = Instantiate(bullet, firePoint.position, firePoint.rotation);
             if (gObject != null)
             {

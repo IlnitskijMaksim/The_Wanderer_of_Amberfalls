@@ -5,6 +5,7 @@ public class test : MonoBehaviour
 {
     [SerializeField] float chaseRadius = 10f; // Радиус преследования игрока
     [SerializeField] float walkRadius = 5f;   // Радиус случайного блуждания
+    [SerializeField] float moveSpeed = 3f; // Параметр скорости
     [SerializeField] string wallTag = "Walls"; // Тег объектов, которые считаются стенами.
 
     private Transform player;                  // Ссылка на игрока
@@ -17,6 +18,9 @@ public class test : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        // Устанавливаем параметр скорости
+        agent.speed = moveSpeed;
 
         // Находим игрока по тегу "Player"
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -41,7 +45,7 @@ public class test : MonoBehaviour
             isChasing = false;
             SetNewRandomDestination();
         }
-        else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.1f)
+        else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.5f)
         {
             // Если не преследуем игрока и достигли случайной точки назначения, устанавливаем новую
             SetNewRandomDestination();

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class NefreteeBow : Bow
 {
-    
+    public override void Shoot()
+    {
+        
+    }
 
     private void Update()
     {

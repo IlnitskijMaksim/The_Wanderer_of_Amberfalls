@@ -7,6 +7,7 @@ public class Bow : ToWeapon
     public GameObject bullet;
     private float timeFire;
     public float buletSpeed_1;
+    public AudioSource sound;
 
     public override void Shoot()
     {
@@ -17,9 +18,15 @@ public class Bow : ToWeapon
             {
                 gObject.GetComponent<ArrowBullet>().tw = this;
                 gObject.GetComponent<ArrowBullet>().bulletSpeed = buletSpeed_1;
+                shootSound();
             }
             timeFire = fireRate;
         }
+    }
+
+    public void shootSound()
+    {
+        sound.Play();
     }
 
     public void Start()

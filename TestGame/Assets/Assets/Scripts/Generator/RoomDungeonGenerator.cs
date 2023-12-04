@@ -73,6 +73,7 @@ public class RoomDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return floor;
     }
 
+
     private HashSet<Vector2Int> ConnectRooms(List<Vector2Int> roomCenters)
     {
         HashSet<Vector2Int> corridors = new HashSet<Vector2Int>();
@@ -90,37 +91,38 @@ public class RoomDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return corridors;
     }
 
-    private HashSet<Vector2Int> CreateCorridor(Vector2Int currentRoomCenter, Vector2Int destination)
-    {
-        HashSet<Vector2Int> corridor = new HashSet<Vector2Int>();
-        var position = currentRoomCenter;
-        corridor.Add(position);
-        while (position.y != destination.y)
-        {
-            if(destination.y > position.y)
-            {
-                position += Vector2Int.up;
-            }
-            else if(destination.y < position.y)
-            {
-                position += Vector2Int.down;
-            }
-            corridor.Add(position);
-        }
-        while (position.x != destination.x)
-        {
-            if (destination.x > position.x)
-            {
-                position += Vector2Int.right;
-            }
-            else if (destination.x < position.x)
-            {
-                position += Vector2Int.left;
-            }
-            corridor.Add(position);
-        }
-        return corridor;
-    }
+  private HashSet<Vector2Int> CreateCorridor(Vector2Int currentRoomCenter, Vector2Int destination)
+       {
+           HashSet<Vector2Int> corridor = new HashSet<Vector2Int>();
+           var position = currentRoomCenter;
+           corridor.Add(position);
+           while (position.y != destination.y)
+           {
+               if(destination.y > position.y)
+               {
+                   position += Vector2Int.up;
+               }
+               else if(destination.y < position.y)
+               {
+                   position += Vector2Int.down;
+               }
+               corridor.Add(position);
+           }
+           while (position.x != destination.x)
+           {
+               if (destination.x > position.x)
+               {
+                   position += Vector2Int.right;
+               }
+               else if (destination.x < position.x)
+               {
+                   position += Vector2Int.left;
+               }
+               corridor.Add(position);
+           }
+           return corridor;
+       }
+
 
     private Vector2Int FindClosestPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenters)
     {

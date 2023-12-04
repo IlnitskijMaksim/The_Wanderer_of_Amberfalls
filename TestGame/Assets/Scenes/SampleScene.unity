@@ -786,7 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRadius: 10
   walkRadius: 1
-  moveSpeed: 20
+  moveSpeed: 5
   wallTag: Walls
 --- !u!114 &136465777
 MonoBehaviour:
@@ -13266,11 +13266,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.52
+      value: 7.14
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.72
+      value: 21.43
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_LocalPosition.z

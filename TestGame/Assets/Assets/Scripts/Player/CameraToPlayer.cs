@@ -9,14 +9,22 @@ public class CameraToPlayer : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (player != null)
+        {
+            player = player.transform;
+        }
     }
 
     private void LateUpdate()
     {
-        Vector3 temp = transform.position;
-        temp.x = player.position.x;
-        temp.y = player.position.y;
+        if (player != null)
+        {
+            Vector3 temp = transform.position;
+            temp.x = player.position.x;
+            temp.y = player.position.y;
 
-        transform.position = temp;
+            transform.position = temp;
+        }
     }
 }

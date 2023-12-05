@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemyShoot : MonoBehaviour
 {
     public float speed;
+    private int destroy = 3;
+
     void Start()
     {
-        
+        Invoke("DestroyTime", destroy);
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector2.up * speed * Time.deltaTime);
@@ -18,9 +19,8 @@ public class EnemyShoot : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-
             Destroy(gameObject);
         }
     }

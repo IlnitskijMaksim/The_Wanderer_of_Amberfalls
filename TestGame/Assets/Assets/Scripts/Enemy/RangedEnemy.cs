@@ -6,14 +6,15 @@ public class EnemyRanged : MonoBehaviour
 {
     public Transform player;
     public GameObject bullet;
+
     private float shootCooldown;
     public float startShootCooldown;
+
     void Start()
     {
         shootCooldown = startShootCooldown;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);

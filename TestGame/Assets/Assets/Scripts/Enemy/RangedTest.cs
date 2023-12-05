@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class test : MonoBehaviour
+public class RangedTest : MonoBehaviour
 {
     [SerializeField] float chaseRadius = 10f; // Радиус преследования игрока
     [SerializeField] float walkRadius = 5f;   // Радиус случайного блуждания
@@ -11,11 +11,16 @@ public class test : MonoBehaviour
     private Transform player;                  // Ссылка на игрока
     private NavMeshAgent agent;                // Компонент NavMeshAgent
     private Vector3 randomDestination;         // Случайная точка назначения
-    private bool isChasing = false;            // Флаг для отслеживания состояния преследования
+    private bool isShooting = false;            // Флаг для отслеживания состояния преследования
+
+    public GameObject bullet;
+    private float shootCooldown;
+    public float startShootCooldown;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        shootCooldown = startShootCooldown;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -39,26 +44,40 @@ public class test : MonoBehaviour
             // Если расстояние до игрока меньше радиуса преследования, преследуем игрока
             if (distanceToPlayer <= chaseRadius)
             {
-                isChasing = true;
-                agent.SetDestination(player.position);
-            }
-            else if (isChasing)
-            {
-                // Если преследование было активировано, но игрок вышел из радиуса, перейдем в случайное блуждание
-                isChasing = false;
+                isShooting = true;
                 SetNewRandomDestination();
             }
-            else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.5f)
+            else
             {
-                // Если не преследуем игрока и достигли случайной точки назначения, устанавливаем новую
+                isShooting = false;
                 SetNewRandomDestination();
+            }
+
+            if (isShooting)
+            {
+                Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
+
+                transform.up = direction;
+
+                if (shootCooldown <= 0)
+                {
+                    Instantiate(bullet, transform.position, transform.rotation);
+                    shootCooldown = startShootCooldown;
+                }
+                else
+                {
+                    shootCooldown -= Time.deltaTime;
+                }
+
             }
         }
         else
         {
-            isChasing = false;
+            isShooting = false;
         }
+
     }
+
 
     private void SetNewRandomDestination()
     {

@@ -47,9 +47,15 @@ public class RangedTest : MonoBehaviour
                 isShooting = true;
                 SetNewRandomDestination();
             }
-            else
+            else if (isShooting)
             {
+                // Если преследование было активировано, но игрок вышел из радиуса, перейдем в случайное блуждание
                 isShooting = false;
+                SetNewRandomDestination();
+            }
+            else if (!isShooting && Vector3.Distance(transform.position, randomDestination) < 0.3f)
+            {
+                // Если не преследуем игрока и достигли случайной точки назначения, устанавливаем новую
                 SetNewRandomDestination();
             }
 

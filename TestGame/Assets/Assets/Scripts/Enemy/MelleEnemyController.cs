@@ -48,7 +48,7 @@ public class test : MonoBehaviour
                 isChasing = false;
                 SetNewRandomDestination();
             }
-            else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.5f)
+            else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.3f)
             {
                 // Если не преследуем игрока и достигли случайной точки назначения, устанавливаем новую
                 SetNewRandomDestination();

@@ -11,7 +11,7 @@ public class CollisionDamage : MonoBehaviour
     {
         string entityTag = collision.gameObject.tag;
 
-        EntityStats health = collision.gameObject.GetComponent<EntityStats>();
+        PlayerStats health = collision.gameObject.GetComponent<PlayerStats>();
         if (health != null)
         {
             health.GiveDamage(entityDamage);

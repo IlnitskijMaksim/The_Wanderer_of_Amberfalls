@@ -5,7 +5,6 @@ public class EnemyShoot : MonoBehaviour
     public float speed;
     private float destroyTime = 3f;
     public float damage;
-    [SerializeField] private float entityDamage;
     public ToWeapon tw;
 
     void Start()
@@ -23,14 +22,15 @@ public class EnemyShoot : MonoBehaviour
         // Если объект не является текущим объектом (стрелой)
         if (!other.gameObject.CompareTag("Enemy"))
         {
-            EntityStats enemy = other.GetComponent<EntityStats>();
+            PlayerStats enemy = other.GetComponent<PlayerStats>();
             if (enemy != null)
             {
                 // Check if the enemy object has an EntityStats component before accessing it
-                enemy.GiveDamage(tw != null ? tw.getDamage() : 0);
+                enemy.GiveDamage(tw != null ? tw.getDamage() : damage);
             }
             Destroy(gameObject);
         }
+        
     }
 
     void DestroyTime()

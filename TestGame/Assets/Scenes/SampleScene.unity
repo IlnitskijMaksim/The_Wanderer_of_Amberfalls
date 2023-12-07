@@ -12906,13 +12906,15 @@ GameObject:
   m_Component:
   - component: {fileID: 913030247}
   - component: {fileID: 913030248}
+  - component: {fileID: 913030249}
+  - component: {fileID: 913030250}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &913030247
 Transform:
   m_ObjectHideFlags: 0
@@ -12921,7 +12923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913030246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61, y: 1.19, z: 0}
+  m_LocalPosition: {x: -0.61, y: 0.1, z: 0}
   m_LocalScale: {x: 37.296318, y: 37.296318, z: 37.29639}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12980,6 +12982,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &913030249
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913030246}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 597ec72447b07b1458e5424399bac1dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &913030250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913030246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2393644f0bf1dc948865eb431ac00ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorSword: {fileID: 913030249}
+  delay: 0.3
 --- !u!1 &998840400
 GameObject:
   m_ObjectHideFlags: 0

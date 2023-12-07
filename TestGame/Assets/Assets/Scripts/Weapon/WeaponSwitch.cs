@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class WeaponSwitch : MonoBehaviour
 {
+    private Sword[] swords;
 
     public int selectedWeapon = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
+        swords = GetComponentsInChildren<Sword>();
         SelectWeapon();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         int previousSelectedWeapon = selectedWeapon;
 
@@ -31,17 +32,23 @@ public class WeaponSwitch : MonoBehaviour
         }
     }
 
-    void SelectWeapon()
+    private void SelectWeapon()
     {
-        int i = 0;
-        foreach (Transform weapon in transform)
+        for (int i = 0; i < transform.childCount; i++)
         {
             if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
             else
-                weapon.gameObject.SetActive(false);
-            
-            i++;
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+                // Отменить атаку для всех мечей, которые были отключены
+                if (swords != null && i < swords.Length)
+                {
+                    swords[i].CancelAttack();
+                }
+            }
         }
     }
 }

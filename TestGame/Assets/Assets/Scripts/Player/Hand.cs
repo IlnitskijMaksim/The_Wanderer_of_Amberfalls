@@ -6,6 +6,7 @@ public class Hand : MonoBehaviour
 {
     public float offset;
 
+
     void Update()
     {
         Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -24,4 +25,6 @@ public class Hand : MonoBehaviour
 
         transform.localScale = scale;
     }
+
+
 }

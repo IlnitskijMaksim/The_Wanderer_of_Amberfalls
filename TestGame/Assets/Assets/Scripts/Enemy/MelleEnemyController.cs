@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,6 +29,7 @@ public class test : MonoBehaviour
 
         // Запускаем случайное блуждание
         SetNewRandomDestination();
+        StartCoroutine(RandomDestinationRoutine());
     }
 
     private void Update()
@@ -75,6 +77,17 @@ public class test : MonoBehaviour
         {
             randomDestination = newPosition;
             agent.SetDestination(randomDestination);
+        }
+    }
+
+    private IEnumerator RandomDestinationRoutine()
+    {
+        while (true)
+        {
+            SetNewRandomDestination();
+
+            // Ждем 2 секунды
+            yield return new WaitForSeconds(2f);
         }
     }
 

@@ -5,8 +5,10 @@ public class Sword : MonoBehaviour
 {
     public Animator animatorSword;
     public float delay = 0.3f;
+    public float damage = 5f;
     private bool attackBlocked;
     private Hand hand;
+    
 
     private void Start()
     {
@@ -28,6 +30,8 @@ public class Sword : MonoBehaviour
 
         animatorSword.SetTrigger("Attack");
         attackBlocked = true;
+
+        // Запускаем задержку атаки
         StartCoroutine(DelayAttack());
     }
 
@@ -35,6 +39,23 @@ public class Sword : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         attackBlocked = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            if (!other.gameObject.CompareTag("Player"))
+            {
+                EntityStats enemy = other.GetComponent<EntityStats>();
+
+                if (enemy != null)
+                {
+                   enemy.GiveDamage(damage);
+                }
+            }
+        }
+            
     }
 
     public void CancelAttack()

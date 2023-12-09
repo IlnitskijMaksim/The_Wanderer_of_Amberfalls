@@ -888,6 +888,10 @@ PrefabInstance:
       value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -12251,7 +12255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.94, y: 20.91, z: -10}
+  m_LocalPosition: {x: 30.68, y: 19.51, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12335,8 +12339,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617189276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.82, y: 7.95, z: 0}
-  m_LocalScale: {x: 0.5465, y: 0.5465, z: 1}
+  m_LocalPosition: {x: 30.46, y: 5.59, z: 0}
+  m_LocalScale: {x: 0.74896014, y: 0.73431367, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1591861281}
@@ -12495,7 +12499,7 @@ MonoBehaviour:
   moveSpeed: 3
   wallTag: Walls
   bullet: {fileID: 2999793542087160517, guid: 89a265cf28e9a6d449e77369d14bbde9, type: 3}
-  startShootCooldown: 5
+  startShootCooldown: 3
 --- !u!114 &617189285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13164,13 +13168,14 @@ GameObject:
   - component: {fileID: 913030248}
   - component: {fileID: 913030249}
   - component: {fileID: 913030250}
-  m_Layer: 0
+  - component: {fileID: 913030251}
+  m_Layer: 8
   m_Name: Sword
   m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &913030247
 Transform:
   m_ObjectHideFlags: 0
@@ -13273,6 +13278,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorSword: {fileID: 913030249}
   delay: 0.3
+  damage: 5
+--- !u!70 &913030251
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913030246}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0043424633, y: 0.07349747}
+  m_Size: {x: 0.070650294, y: 0.20004085}
+  m_Direction: 0
 --- !u!1 &998840400
 GameObject:
   m_ObjectHideFlags: 0
@@ -14199,6 +14240,10 @@ PrefabInstance:
       value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -14316,6 +14361,10 @@ PrefabInstance:
     - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_Name
       value: Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ff5f5cb88789734d838b8723ff015d4, type: 3}
       propertyPath: m_TagString
@@ -14947,7 +14996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926891340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.94, y: 20.91, z: 0}
+  m_LocalPosition: {x: 30.68, y: 19.51, z: 0}
   m_LocalScale: {x: 3.0357502, y: 3.0357502, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26319,13 +26368,13 @@ GameObject:
   - component: {fileID: 2079145309}
   - component: {fileID: 2079145310}
   - component: {fileID: 2079145311}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2079145307
 Transform:
   m_ObjectHideFlags: 0
@@ -26780,7 +26829,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123534955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.94, y: 20.91, z: -10}
+  m_LocalPosition: {x: 30.68, y: 19.51, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

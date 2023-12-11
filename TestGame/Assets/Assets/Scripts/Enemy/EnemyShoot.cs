@@ -32,7 +32,7 @@ public class EnemyShoot : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Если объект не является врагом
-        if (!other.gameObject.CompareTag("Enemy"))
+        if (!other.gameObject.CompareTag("Enemy") || !other.gameObject.CompareTag("Sword"))
         {
             PlayerStats enemy = other.GetComponent<PlayerStats>();
             if (enemy != null)

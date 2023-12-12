@@ -13,12 +13,14 @@ public class UIInventoryPage : MonoBehaviour
     List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
 
+
+
     public void InitializeInventoryUI(int inventorysize)
     {
 
         for (int i = 0; i < inventorysize; i++) 
         { 
-            UIInventoryItem uiItem =  Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
+            UIInventoryItem uiItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity, contentPanel);
             uiItem.transform.SetParent(contentPanel);
             listOfUIItems.Add(uiItem);        
         }

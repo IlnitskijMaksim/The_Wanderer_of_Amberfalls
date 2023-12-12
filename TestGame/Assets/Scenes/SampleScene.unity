@@ -26223,6 +26223,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6340335777456563284, guid: 0dc61390e296f3f4fb9659ea85c14fb8, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 2016126149}
     - target: {fileID: 6528206432536922818, guid: 0dc61390e296f3f4fb9659ea85c14fb8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -26271,6 +26275,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8472649674233754801, guid: 0dc61390e296f3f4fb9659ea85c14fb8, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 2016126149}
     - target: {fileID: 8665112547586733571, guid: 0dc61390e296f3f4fb9659ea85c14fb8, type: 3}
       propertyPath: m_BodyType
       value: 0
@@ -26633,9 +26641,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8345191474636632784, guid: 7b6482a37523dfe46ab75a3dd2ee4434, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 922384254, guid: ae7e8a805dbd30348986ac62b664ce86, type: 3}
+    - target: {fileID: 8345191474636632784, guid: 7b6482a37523dfe46ab75a3dd2ee4434, type: 3}
+      propertyPath: title
+      value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345191474636632784, guid: 7b6482a37523dfe46ab75a3dd2ee4434, type: 3}
+      propertyPath: quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345191474636632784, guid: 7b6482a37523dfe46ab75a3dd2ee4434, type: 3}
       propertyPath: itemPrefab
       value: 
       objectReference: {fileID: 3804699391614671447, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
+    - target: {fileID: 8345191474636632784, guid: 7b6482a37523dfe46ab75a3dd2ee4434, type: 3}
+      propertyPath: description
+      value: Aaaaaaaaaaaaaaaaa....
+      objectReference: {fileID: 0}
     - target: {fileID: 8924817486339337830, guid: 7b6482a37523dfe46ab75a3dd2ee4434, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -10,6 +10,7 @@ public class Bow : ToWeapon
     public AudioSource sound;
     public Transform handPoint;
     public Transform hand;
+    public UIInventoryPage inventory;
 
     public override void Shoot()
     {
@@ -45,9 +46,12 @@ public class Bow : ToWeapon
             hand.rotation = handPoint.rotation;
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if(!inventory || !inventory.IsInventoryOpen())
         {
-            Shoot();
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                Shoot();
+            }
         }
 
         timeFire -= Time.deltaTime;

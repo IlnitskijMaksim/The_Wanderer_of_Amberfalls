@@ -435,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 3804699391614671447, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
   contentPanel: {fileID: 8924817486339337830}
+  itemDescription: {fileID: 7218277064213208200}
 --- !u!1 &3728530471369075893
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,8 +756,9 @@ GameObject:
   - component: {fileID: 2249053768686324361}
   - component: {fileID: 7096822816089030868}
   - component: {fileID: 137076486498701418}
+  - component: {fileID: 7218277064213208200}
   m_Layer: 5
-  m_Name: InventoryDiscription
+  m_Name: InventoryDescription
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -868,6 +870,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &7218277064213208200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881863371448051166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3149b8bbd6efe4b844eadd4ebbe1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 256856181397843845}
+  title: {fileID: 4301954899289799814}
+  description: {fileID: 6062290884630011727}
 --- !u!1 &5533677747999765597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,19 +1738,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 43.199997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9.249992
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8505834422774252708, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_Pivot.x

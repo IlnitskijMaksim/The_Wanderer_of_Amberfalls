@@ -7,8 +7,8 @@ public class Sword : MonoBehaviour
     public float delay = 0.3f;
     public float damage = 5f;
     private bool attackBlocked;
-    private Hand hand;
-    
+    public UIInventoryPage inventory;
+
 
     private void Start()
     {
@@ -17,10 +17,14 @@ public class Sword : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (!inventory || !inventory.IsInventoryOpen())
         {
-            SwordAttack();
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                SwordAttack();
+            }
         }
+
     }
 
     public void SwordAttack()

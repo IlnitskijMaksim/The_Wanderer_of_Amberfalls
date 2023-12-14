@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,9 +19,12 @@ public class RoomDungeonGenerator : SimpleRandomWalkDungeonGenerator
     [SerializeField]
     private bool randomWalkRooms = false;
 
+    public NavMeshSurface navMeshSurface;
+
     protected override void RunProceduralGeneration()
     {
         CreateRooms();
+        BakeNavMesh();
     }
 
     private void CreateRooms()
@@ -155,5 +159,17 @@ public class RoomDungeonGenerator : SimpleRandomWalkDungeonGenerator
             }
         }
         return floor;
+    }
+
+    private void BakeNavMesh()
+    {
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.BuildNavMesh();
+        }
+        else
+        {
+            Debug.LogError("NavMesh baking error");
+        }
     }
 }

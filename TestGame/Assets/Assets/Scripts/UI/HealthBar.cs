@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
         slider.value = currentHealth;
     }
 
-    public void SetHealth(int currentHealth)
+    public void SetHealth(float currentHealth)
     {
         slider.value = currentHealth;
     }

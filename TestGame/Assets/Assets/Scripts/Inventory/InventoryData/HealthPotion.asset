@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4314e33c9e16047b15e2e14da75f19, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  <IsStackable>k__BackingField: 0
-  <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 
-  <ItemImage>k__BackingField: {fileID: 0}
-  modifiersData: []
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 20
+  <Name>k__BackingField: Haelth Potion
+  <Description>k__BackingField: Is it blood?
+  <ItemImage>k__BackingField: {fileID: -7068870319514156213, guid: f18a7e2449cdf5a499e7995d774a03a5, type: 3}
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 1f2be964ccea5b5459c6e958f8790847, type: 2}
+    value: 1

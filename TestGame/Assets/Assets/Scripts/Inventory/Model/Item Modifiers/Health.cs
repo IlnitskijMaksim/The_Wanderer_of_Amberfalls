@@ -21,10 +21,7 @@ public class Health : MonoBehaviour
         healthBar.SetMaxHealth((int)maxHealth);
     }
 
-    public FloatValueSO GetCurrentHealth()
-    {
-        return currentHealth;
-    }
+    
 
     public void Reduce(int damage, FloatValueSO currentHealth)
     {

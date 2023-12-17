@@ -1,18 +1,27 @@
-using System.Collections;
-using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class test : MonoBehaviour
 {
-    [SerializeField] float chaseRadius = 10f; // Радиус преследования игрока
-    [SerializeField] float walkRadius = 5f;   // Радиус случайного блуждания
-    [SerializeField] float moveSpeed = 3f; // Параметр скорости
-    [SerializeField] string wallTag = "Walls"; // Тег объектов, которые считаются стенами.
+    [SerializeField] private float entityDamage = 2f;
+    [SerializeField] private float damageInterval = 2f; // Интервал между ударами
+    [SerializeField] float chaseRadius = 10f; 
+    [SerializeField] float walkRadius = 5f;   
+    [SerializeField] float moveSpeed = 3f;   
+    [SerializeField] string wallTag = "Walls"; 
 
-    private Transform player;                  // Ссылка на игрока
-    private NavMeshAgent agent;                // Компонент NavMeshAgent
-    private Vector3 randomDestination;         // Случайная точка назначения
-    private bool isChasing = false;            // Флаг для отслеживания состояния преследования
+    private bool isCooldown = false;             
+    private float fleeCooldownDuration = 2f;     
+    private bool hasNewOppositePoint = false;
+    private bool isFleeing = false;               // Флаг для отслеживания состояния убегания
+    private float lastDamageTime;                 // Время последнего удара
+    private Transform player;                     // Ссылка на игрока
+    private NavMeshAgent agent;                   // Компонент NavMeshAgent
+    private Vector3 randomDestination;            // Случайная точка назначения
+    private bool isChasing = false;               // Флаг для отслеживания состояния преследования
+    private bool shouldFollowPlayer = false;      // Флаг для определения, следовать ли за игроком после достижения случайной точки
 
     private void Start()
     {
@@ -32,28 +41,40 @@ public class test : MonoBehaviour
         StartCoroutine(RandomDestinationRoutine());
     }
 
+
     private void Update()
     {
         if (player != null)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-            // Если расстояние до игрока меньше радиуса преследования, преследуем игрока
-            if (distanceToPlayer <= chaseRadius)
+            // Если достигли новой случайной точки и не преследуем игрока, возвращаемся к преследованию
+            if (!agent.pathPending && agent.remainingDistance < 0.5f && !isChasing)
             {
                 isChasing = true;
+                shouldFollowPlayer = true;
+
+                // Если не убегаем, устанавливаем точку к игроку
+                if (!isFleeing)
+                {
+                    agent.SetDestination(player.position);
+                }
+            }
+
+            // Если следование за игроком разрешено, устанавливаем точку к игроку
+            if (shouldFollowPlayer)
+            {
                 agent.SetDestination(player.position);
             }
-            else if (isChasing)
+
+            // Если преследование активировано и игрок не в радиусе, возвращаемся к случайному блужданию
+            if (isChasing && Vector3.Distance(transform.position, player.position) > chaseRadius)
             {
-                // Если преследование было активировано, но игрок вышел из радиуса, перейдем в случайное блуждание
                 isChasing = false;
-                SetNewRandomDestination();
-            }
-            else if (!isChasing && Vector3.Distance(transform.position, randomDestination) < 0.3f)
-            {
-                // Если не преследуем игрока и достигли случайной точки назначения, устанавливаем новую
-                SetNewRandomDestination();
+                shouldFollowPlayer = false;
+                SetNewOppositePoint();
+                agent.SetDestination(randomDestination);
+
+                // Сбрасываем флаг, чтобы можно было установить новое направление при следующем столкновении
+                hasNewOppositePoint = false;
             }
         }
         else
@@ -84,7 +105,10 @@ public class test : MonoBehaviour
     {
         while (true)
         {
-            SetNewRandomDestination();
+            if (!isFleeing)
+            {
+                SetNewRandomDestination();
+            }
 
             // Ждем 2 секунды
             yield return new WaitForSeconds(2f);
@@ -101,4 +125,78 @@ public class test : MonoBehaviour
 
         return hit.position;
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        string entityTag = collision.gameObject.tag;
+
+        // Check if it's time to flee again
+        if (!isCooldown && Time.time - lastDamageTime >= damageInterval)
+        {
+            PlayerStats health = collision.gameObject.GetComponent<PlayerStats>();
+            if (health != null)
+            {
+                health.GiveDamage(entityDamage);
+
+                // Update the time of the last damage
+                lastDamageTime = Time.time;
+
+                // Set the flag to start fleeing
+                isFleeing = true;
+
+                // Set a cooldown period during which the enemy won't immediately switch back to chasing
+                StartCoroutine(FleeCooldown());
+
+                // Set a new destination away from the player
+                SetNewOppositePoint();
+                isChasing = false;
+                shouldFollowPlayer = false;
+                agent.SetDestination(randomDestination);
+            }
+        }
+    }
+
+    private IEnumerator FleeCooldown()
+    {
+        // Set the cooldown flag to true
+        isCooldown = true;
+
+        // Wait for the cooldown duration
+        yield return new WaitForSeconds(fleeCooldownDuration);
+
+        // Reset the cooldown flag
+        isCooldown = false;
+    }
+
+    private void SetNewOppositePoint()
+    {
+        // Check if the player is nearby
+        if (Vector3.Distance(transform.position, player.position) <= chaseRadius)
+        {
+            // Determine the vector from the player to the current enemy position
+            Vector3 directionToPlayer = transform.position - player.position;
+
+            // Normalize the vector and multiply by walkRadius to get a point in the opposite direction with the specified radius
+            Vector3 oppositePoint = transform.position + directionToPlayer.normalized * walkRadius;
+
+            // Check for walls in the chosen direction
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, oppositePoint - transform.position, out hit, walkRadius) &&
+                hit.collider.CompareTag(wallTag))
+            {
+                // If there is a wall, try again after a random delay
+                Invoke("SetNewOppositePoint", Random.Range(1f, 3f));
+            }
+            else
+            {
+                randomDestination = oppositePoint;
+            }
+        }
+        else
+        {
+            // Player is not nearby, choose a random destination within the walkRadius
+            randomDestination = RandomNavMeshLocation();
+        }
+    }
+
 }

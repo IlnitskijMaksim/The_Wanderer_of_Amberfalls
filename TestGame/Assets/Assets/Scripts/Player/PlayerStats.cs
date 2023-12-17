@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-
+    private bool damageGiven = false;
     public float health;
     public float maxHealth;
 
@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour
             Destroy(gameObject);
         }
 
+        damageGiven = true;
         healthBar.SetHealth((int)health);
     }
 
@@ -35,6 +36,11 @@ public class PlayerStats : MonoBehaviour
         {
             health = maxHealth;
         }
+    }
+
+    public bool IsDamageGiven()
+    {
+        return damageGiven;
     }
 
 }

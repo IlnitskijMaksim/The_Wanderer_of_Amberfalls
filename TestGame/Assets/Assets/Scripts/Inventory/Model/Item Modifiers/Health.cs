@@ -8,20 +8,24 @@ public class Health : MonoBehaviour
     [SerializeField] private float maxHealth = 10;
     [SerializeField] private FloatValueSO currentHealth;
 
-    [SerializeField] private GameObject bloodParticle;
+    //[SerializeField] private GameObject bloodParticle;
 
-    [SerializeField] private Renderer renderer;
-    [SerializeField] private float flashTime = 0.2f;
+    //[SerializeField] private Renderer renderer;
+    //[SerializeField] private float flashTime = 0.2f;
+
+    public HealthBar healthBar;
 
     private void Start()
     {
         currentHealth.Value = 1;
+        healthBar.SetMaxHealth((int)maxHealth);
     }
 
     public void Reduce(int damage)
     {
         currentHealth.Value -= damage / maxHealth;
-        CreateHitFeedback();
+        healthBar.SetHealth((int)currentHealth);
+        //CreateHitFeedback();
         if (currentHealth.Value <= 0)
         {
             Die();
@@ -35,7 +39,7 @@ public class Health : MonoBehaviour
         currentHealth.Value = (val > maxHealth ? maxHealth : val / maxHealth);
     }
 
-    private void CreateHitFeedback()
+    /*private void CreateHitFeedback()
     {
         Instantiate(bloodParticle, transform.position, Quaternion.identity);
         StartCoroutine(FlashFeedback());
@@ -47,7 +51,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(flashTime);
         renderer.material.SetInt("_Flash", 0);
     }
-
+    */
     private void Die()
     {
         Debug.Log("Died");

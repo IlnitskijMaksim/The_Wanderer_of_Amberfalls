@@ -126,18 +126,18 @@ public class test : MonoBehaviour
         return hit.position;
     }
 
-    private void OnCollisionStay2D(Collision2D collision, int damage)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        string entityTag = collision.gameObject.tag;
+        string entityTag = other.gameObject.tag;
 
         // Check if it's time to flee again
         if (!isCooldown && Time.time - lastDamageTime >= damageInterval)
         {
-            Health health = collision.gameObject.GetComponent<Health>();
+            Health health = other.gameObject.GetComponent<Health>();
             if (health != null)
             {
-                health.Reduce(damage);
-
+                health.Reduce((int)entityDamage, health.currentHealth);
+                
                 // Update the time of the last damage
                 lastDamageTime = Time.time;
 
@@ -151,7 +151,7 @@ public class test : MonoBehaviour
                 SetNewOppositePoint();
                 isChasing = false;
                 shouldFollowPlayer = false;
-                agent.SetDestinathion(randomDestination);
+                agent.SetDestination(randomDestination);
             }
         }
     }

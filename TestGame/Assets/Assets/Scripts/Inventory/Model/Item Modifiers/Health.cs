@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         currentHealth.Value = 1;
-        healthBar.SetMaxHealth((int)maxHealth);
+        
     }
 
     
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
     public void Reduce(int damage, FloatValueSO currentHealth)
     {
         currentHealth.Value -= damage / maxHealth;
-        healthBar.SetHealth((int)currentHealth.Value);
+        healthBar.SetHealth(currentHealth.Value);
         //CreateHitFeedback();
         if (currentHealth.Value <= 0)
         {
@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
         int health = Mathf.RoundToInt(currentHealth.Value * maxHealth);
         int value = health + healthBoost;
         currentHealth.Value = (value > maxHealth ? maxHealth : value / maxHealth);
-        healthBar.SetHealth((int)currentHealth.Value);
+        healthBar.SetHealth(currentHealth.Value);
     }
 
     /*private void CreateHitFeedback()

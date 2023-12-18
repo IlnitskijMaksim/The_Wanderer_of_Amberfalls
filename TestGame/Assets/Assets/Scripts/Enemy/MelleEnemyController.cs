@@ -10,7 +10,7 @@ public class test : MonoBehaviour
     [SerializeField] float chaseRadius = 10f; 
     [SerializeField] float walkRadius = 5f;   
     [SerializeField] float moveSpeed = 3f;   
-    [SerializeField] string wallTag = "Walls"; 
+    [SerializeField] string wallTag = "Walls";
 
     private bool isCooldown = false;             
     private float fleeCooldownDuration = 2f;     
@@ -126,17 +126,17 @@ public class test : MonoBehaviour
         return hit.position;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision, int damage)
     {
         string entityTag = collision.gameObject.tag;
 
         // Check if it's time to flee again
         if (!isCooldown && Time.time - lastDamageTime >= damageInterval)
         {
-            PlayerStats health = collision.gameObject.GetComponent<PlayerStats>();
+            Health health = collision.gameObject.GetComponent<Health>();
             if (health != null)
             {
-                health.GiveDamage(entityDamage);
+                health.Reduce(damage);
 
                 // Update the time of the last damage
                 lastDamageTime = Time.time;
@@ -151,7 +151,7 @@ public class test : MonoBehaviour
                 SetNewOppositePoint();
                 isChasing = false;
                 shouldFollowPlayer = false;
-                agent.SetDestination(randomDestination);
+                agent.SetDestinathion(randomDestination);
             }
         }
     }

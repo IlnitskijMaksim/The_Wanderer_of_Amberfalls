@@ -56,6 +56,7 @@ public class test : MonoBehaviour
                 if (!isFleeing)
                 {
                     agent.SetDestination(player.position);
+
                 }
             }
 
@@ -105,9 +106,11 @@ public class test : MonoBehaviour
     {
         while (true)
         {
-            if (!isFleeing)
+            if (isFleeing = true)
             {
+                yield return new WaitForSeconds(2f);
                 SetNewRandomDestination();
+                isFleeing = false;
             }
 
             // ∆дем 2 секунды

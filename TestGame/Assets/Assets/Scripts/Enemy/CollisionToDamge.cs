@@ -1,28 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
 {
-    [SerializeField] private float entityDamage;
-    [SerializeField] private float damageInterval = 2f; // Интервал между ударами
+    public float entityDamage;
+    public float damageInterval = 2f; // Интервал между ударами
     private float lastDamageTime; // Время последнего удара
+    private bool isCooldown = false;
+    private float fleeCooldownDuration = 2f;
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        string entityTag = collision.gameObject.tag;
+        string entityTag = other.gameObject.tag;
 
-        // Проверяем, прошло ли достаточно времени с момента последнего удара
-        if (Time.time - lastDamageTime >= damageInterval)
+        // Check if it's time to flee again
+        if (!isCooldown && Time.time - lastDamageTime >= damageInterval)
         {
-            PlayerStats health = collision.gameObject.GetComponent<PlayerStats>();
+            Health health = other.gameObject.GetComponent<Health>();
             if (health != null)
             {
-                health.GiveDamage(entityDamage);
+                health.Reduce((int)entityDamage, health.currentHealth);
 
-                // Обновляем время последнего удара
+                // Update the time of the last damage
                 lastDamageTime = Time.time;
+                StartCoroutine(FleeCooldown());
             }
         }
+    }
+
+    private IEnumerator FleeCooldown()
+    {
+        // Set the cooldown flag to true
+        isCooldown = true;
+
+        // Wait for the cooldown duration
+        yield return new WaitForSeconds(fleeCooldownDuration);
+
+        // Reset the cooldown flag
+        isCooldown = false;
     }
 }

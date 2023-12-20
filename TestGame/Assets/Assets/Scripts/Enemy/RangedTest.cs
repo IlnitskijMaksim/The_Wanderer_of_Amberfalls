@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,10 +34,12 @@ public class RangedTest : MonoBehaviour
 
         // Запускаем случайное блуждание
         SetNewRandomDestination();
+        StartCoroutine(RandomDestinationRoutine());
     }
 
     private void Update()
     {
+
         if (player != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -103,6 +106,7 @@ public class RangedTest : MonoBehaviour
         }
     }
 
+   
     private Vector3 RandomNavMeshLocation()
     {
         Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
@@ -113,4 +117,14 @@ public class RangedTest : MonoBehaviour
 
         return hit.position;
     }
+
+    private IEnumerator RandomDestinationRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2f);
+            SetNewRandomDestination();        
+        }
+    }
+   
 }

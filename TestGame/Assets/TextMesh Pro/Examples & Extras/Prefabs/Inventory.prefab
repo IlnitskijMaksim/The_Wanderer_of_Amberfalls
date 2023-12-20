@@ -433,9 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bdf28bd6c59d04ab7a494d0c48199a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 3804699391614671447, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
+  inventoryItemUIPrefab: {fileID: 0}
   contentPanel: {fileID: 8924817486339337830}
   itemDescription: {fileID: 7218277064213208200}
+  mouseFollower: {fileID: 0}
+  actionPanel: {fileID: 0}
 --- !u!1 &3728530471369075893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,8 +1460,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1619553946430062753}
   m_HandleRect: {fileID: 3217602490049709816}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1738,19 +1740,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 43.199997
       objectReference: {fileID: 0}
     - target: {fileID: 5771370031949859078, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -9.249992
       objectReference: {fileID: 0}
     - target: {fileID: 8505834422774252708, guid: eecc39dc314e3144aa746629ef0012aa, type: 3}
       propertyPath: m_Pivot.x

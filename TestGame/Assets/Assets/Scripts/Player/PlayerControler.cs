@@ -23,16 +23,20 @@ public class PlayerController : MonoBehaviour
         Vector3 playerPosition = transform.position;
 
         // Определяем направление взгляда
-        if (mousePosition.x < playerPosition.x)
+        if (!PauseMenu.GameIsPaused)
         {
-            // Если курсор слева от игрока, отзеркаливаем спрайт по горизонтальной оси
-            spriteRenderer.flipX = true;
+            if (mousePosition.x < playerPosition.x)
+            {
+                // Если курсор слева от игрока, отзеркаливаем спрайт по горизонтальной оси
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                // Если курсор справа от игрока, не отзеркаливаем спрайт
+                spriteRenderer.flipX = false;
+            }
         }
-        else
-        {
-            // Если курсор справа от игрока, не отзеркаливаем спрайт
-            spriteRenderer.flipX = false;
-        }
+       
 
         // Обрабатываем движение
         float inputX = Input.GetAxis("Horizontal");

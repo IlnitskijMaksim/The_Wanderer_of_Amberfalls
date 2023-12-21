@@ -9,32 +9,36 @@ public class Hand : MonoBehaviour
 
     void Update()
     {
-        if (!isCodeDisabled)
+        if (!PauseMenu.GameIsPaused)
         {
-            Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float rotateWeapon = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, rotateWeapon + offset);
-
-            Vector2 scale = transform.localScale;
-            if (direction.x < 0)
+            if (!isCodeDisabled)
             {
-                scale.y = -1;
-            }
-            else if (direction.x > 0)
-            {
-                scale.y = 1;
-            }
+                Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                float rotateWeapon = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, rotateWeapon + offset);
 
-            transform.localScale = scale;
+                Vector2 scale = transform.localScale;
+                if (direction.x < 0)
+                {
+                    scale.y = -1;
+                }
+                else if (direction.x > 0)
+                {
+                    scale.y = 1;
+                }
 
-            // Проверка на зажатие кнопки мыши
-            if (Input.GetMouseButton(0))
-            {
-                // Изменяем задержку в зависимости от времени удерживания кнопки мыши
-                currentDelay = Mathf.Clamp(currentDelay - Time.deltaTime, 0.1f, 1.0f);
-                StartCoroutine(DisableCodeForDuration(currentDelay));
+                transform.localScale = scale;
+
+                // Проверка на зажатие кнопки мыши
+                if (Input.GetMouseButton(0))
+                {
+                    // Изменяем задержку в зависимости от времени удерживания кнопки мыши
+                    currentDelay = Mathf.Clamp(currentDelay - Time.deltaTime, 0.1f, 1.0f);
+                    StartCoroutine(DisableCodeForDuration(currentDelay));
+                }
             }
         }
+        
     }
 
     private IEnumerator DisableCodeForDuration(float duration)

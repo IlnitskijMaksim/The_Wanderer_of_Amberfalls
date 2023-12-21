@@ -15,16 +15,19 @@ public class Bow : ToWeapon
 
     public override void Shoot()
     {
-        if (timeFire <= 0)
-        {
-            GameObject gObject = Instantiate(bullet, firePoint.position, firePoint.rotation);
-            if (gObject != null)
+        if(!PauseMenu.GameIsPaused) 
+        {     
+            if (timeFire <= 0)
             {
-                gObject.GetComponent<ArrowBullet>().tw = this;
-                gObject.GetComponent<ArrowBullet>().bulletSpeed = buletSpeed_1;
-                shootSound();
+                GameObject gObject = Instantiate(bullet, firePoint.position, firePoint.rotation);
+                if (gObject != null)
+                {
+                    gObject.GetComponent<ArrowBullet>().tw = this;
+                    gObject.GetComponent<ArrowBullet>().bulletSpeed = buletSpeed_1;
+                    shootSound();
+                }
+                timeFire = fireRate;
             }
-            timeFire = fireRate;
         }
     }
 

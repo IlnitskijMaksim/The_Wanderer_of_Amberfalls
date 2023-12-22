@@ -7,6 +7,8 @@ TagManager:
   - Walls
   - Enemy
   - Sword
+  - SpawnPoint1
+  - SpawnPoint2
   layers:
   - Default
   - TransparentFX

@@ -25,6 +25,8 @@ public class EnemyShoot : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+
+        Invoke("DestroyTime", 4f);
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -41,7 +43,16 @@ public class EnemyShoot : MonoBehaviour
         if (health != null)
         {
             health.Reduce((int)entityDamage, health.currentHealth);
+            Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }      
+    }
+
+    void DestroyTime()
+    {
         Destroy(gameObject);
     }
 }

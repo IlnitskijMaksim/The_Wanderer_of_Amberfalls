@@ -21,7 +21,7 @@ public class FightingPitRoom : RoomGenerator
             prefabPlacer.PlaceAllItems(itemData, itemPlacementHelper);
 
         placedObjects.AddRange(prefabPlacer.PlaceEnemies(enemyPlacementData, itemPlacementHelper));
-
+        
         return placedObjects;
     }
 }

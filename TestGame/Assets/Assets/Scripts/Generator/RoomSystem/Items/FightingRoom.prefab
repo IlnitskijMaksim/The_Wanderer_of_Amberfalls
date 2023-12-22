@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-4377574308357105756
 MonoBehaviour:
@@ -52,7 +52,7 @@ MonoBehaviour:
     enemySize: {x: 1, y: 1}
   - minQuantity: 3
     maxQuantity: 6
-    enemyPrefab: {fileID: 7713679849731568735, guid: 00d9e32c5b957cf4695d4a047d633dcf, type: 3}
+    enemyPrefab: {fileID: 1731821071190966758, guid: 00d9e32c5b957cf4695d4a047d633dcf, type: 3}
     enemySize: {x: 3, y: 3}
   itemData:
   - minQuantity: 3

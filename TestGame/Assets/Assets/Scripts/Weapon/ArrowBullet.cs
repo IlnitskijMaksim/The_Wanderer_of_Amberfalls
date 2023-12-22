@@ -25,7 +25,7 @@ public class ArrowBullet : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
-        Invoke("DestroyTime", destroy);
+        Invoke("DestroyTime", 4f);
     }
 
     void DestroyTime()

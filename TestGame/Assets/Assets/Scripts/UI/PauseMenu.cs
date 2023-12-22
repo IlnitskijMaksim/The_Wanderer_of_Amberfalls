@@ -37,10 +37,20 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
-    
+    public void LoadMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+    }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void LoadGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("SampleScene");
     }
 }

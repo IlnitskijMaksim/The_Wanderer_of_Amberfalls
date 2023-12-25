@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WeaponSwitch : MonoBehaviour
 {
-    private Sword[] swords;
+    public Sword[] swords;
 
     public int selectedWeapon = 0;
 
@@ -12,7 +12,7 @@ public class WeaponSwitch : MonoBehaviour
         SelectWeapon();
     }
 
-    private void Update()
+    public void Update()
     {
         int previousSelectedWeapon = selectedWeapon;
 
@@ -32,7 +32,7 @@ public class WeaponSwitch : MonoBehaviour
         }
     }
 
-    private void SelectWeapon()
+    public void SelectWeapon()
     {
         for (int i = 0; i < transform.childCount; i++)
         {

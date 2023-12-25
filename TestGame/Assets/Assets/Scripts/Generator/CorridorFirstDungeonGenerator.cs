@@ -20,7 +20,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     private Dictionary<Vector2Int, HashSet<Vector2Int>> roomsDictionary 
         = new Dictionary<Vector2Int, HashSet<Vector2Int>>();
     
-    private HashSet<Vector2Int> floorPositions, corridorPositions;
+    public HashSet<Vector2Int> floorPositions, corridorPositions;
 
     //Gizmos Data
     private List<Color> roomColors = new List<Color>();
@@ -45,7 +45,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         BakeNavMesh();
     }
 
-    private void CorridorFirstGeneration()
+    public void CorridorFirstGeneration()
     {
         floorPositions = new HashSet<Vector2Int>();
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
@@ -87,7 +87,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         OnDungeonFloorReady?.Invoke(data);
     }
 
-    private void CreateRoomsAtDeadEnd(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
+    public void CreateRoomsAtDeadEnd(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
     {
         foreach (var position in deadEnds)
         {
@@ -100,7 +100,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         }
     }
 
-    private List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions)
+    public List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions)
     {
         List<Vector2Int> deadEnds = new List<Vector2Int>();
         foreach (var position in floorPositions)

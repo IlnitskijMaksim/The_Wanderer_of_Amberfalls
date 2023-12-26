@@ -69,18 +69,21 @@ public class PrefabPlacer : MonoBehaviour
 
     public GameObject CreateObject(GameObject prefab, Vector3 placementPosition)
     {
+        GameObject newItem = null;
         if (prefab == null)
             return null;
-        GameObject newItem;
         if (Application.isPlaying)
         {
             newItem = Instantiate(prefab, placementPosition, Quaternion.identity);
         }
         else
         {
+#if UNITY_EDITOR
             newItem = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
             newItem.transform.position = placementPosition;
             newItem.transform.rotation = Quaternion.identity;
+#endif
+
         }
 
         return newItem;

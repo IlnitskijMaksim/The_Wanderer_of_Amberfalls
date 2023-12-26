@@ -8,22 +8,22 @@ public class test : MonoBehaviour
     [SerializeField] private float entityDamage = 2f;
     [SerializeField] private float damageInterval = 2f; // Интервал между ударами
     [SerializeField] float chaseRadius = 10f; 
-    [SerializeField] float walkRadius = 5f;   
+    public float walkRadius = 5f;   
     [SerializeField] float moveSpeed = 3f;   
     [SerializeField] string wallTag = "Walls";
 
-    private bool isCooldown = false;             
-    private float fleeCooldownDuration = 2f;     
-    private bool hasNewOppositePoint = false;
-    private bool isFleeing = false;               // Флаг для отслеживания состояния убегания
-    private float lastDamageTime;                 // Время последнего удара
-    private Transform player;                     // Ссылка на игрока
-    private NavMeshAgent agent;                   // Компонент NavMeshAgent
-    private Vector3 randomDestination;            // Случайная точка назначения
-    private bool isChasing = false;               // Флаг для отслеживания состояния преследования
-    private bool shouldFollowPlayer = false;      // Флаг для определения, следовать ли за игроком после достижения случайной точки
+    public bool isCooldown = false;
+    public float fleeCooldownDuration = 2f;
+    public bool hasNewOppositePoint = false;
+    public bool isFleeing = false;               // Флаг для отслеживания состояния убегания
+    public float lastDamageTime;                 // Время последнего удара
+    public Transform player;                     // Ссылка на игрока
+    public NavMeshAgent agent;                   // Компонент NavMeshAgent
+    public Vector3 randomDestination;            // Случайная точка назначения
+    public bool isChasing = false;               // Флаг для отслеживания состояния преследования
+    public bool shouldFollowPlayer = false;      // Флаг для определения, следовать ли за игроком после достижения случайной точки
 
-    private void Start()
+    public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
@@ -42,12 +42,12 @@ public class test : MonoBehaviour
     }
 
 
-    private void Update()
+    public void Update()
     {
-        if (player != null)
+        if (player != null && agent.isOnNavMesh)
         {
             // Если достигли новой случайной точки и не преследуем игрока, возвращаемся к преследованию
-            if (!agent.pathPending && agent.remainingDistance < 0.5f && !isChasing)
+            if (!agent.isOnNavMesh && agent.remainingDistance < 0.5f && !isChasing)
             {
                 isChasing = true;
                 shouldFollowPlayer = true;
@@ -84,22 +84,15 @@ public class test : MonoBehaviour
         }
     }
 
-    private void SetNewRandomDestination()
+    public void SetNewRandomDestination()
     {
-        // Перед установкой новой точки назначения, проверяем, нет ли стены впереди.
+
         Vector3 newPosition = RandomNavMeshLocation();
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, newPosition - transform.position, out hit, Vector3.Distance(transform.position, newPosition)) &&
-            hit.collider.CompareTag(wallTag))
-        {
-            // Если есть стена, попробуйте снова через некоторое время.
-            Invoke("SetNewRandomDestination", Random.Range(1f, 3f));
-        }
-        else
-        {
-            randomDestination = newPosition;
-            agent.SetDestination(randomDestination);
-        }
+       
+        randomDestination = newPosition;
+        agent.SetDestination(randomDestination);
+        
     }
 
     private IEnumerator RandomDestinationRoutine()
@@ -118,10 +111,15 @@ public class test : MonoBehaviour
         }
     }
 
-    private Vector3 RandomNavMeshLocation()
+    public Vector3 RandomNavMeshLocation()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
-        randomDirection += transform.position;
+        Vector3 randomDirection;
+        do
+        {
+            randomDirection = Random.insideUnitSphere * walkRadius;
+            randomDirection += transform.position;
+            randomDirection.Normalize();
+        } while (randomDirection == Vector3.zero);
 
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
@@ -129,7 +127,8 @@ public class test : MonoBehaviour
         return hit.position;
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+
+    public void OnCollisionStay2D(Collision2D other)
     {
         string entityTag = other.gameObject.tag;
 
@@ -159,7 +158,7 @@ public class test : MonoBehaviour
         }
     }
 
-    private IEnumerator FleeCooldown()
+    public IEnumerator FleeCooldown()
     {
         // Set the cooldown flag to true
         isCooldown = true;

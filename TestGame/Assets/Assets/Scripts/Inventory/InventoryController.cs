@@ -9,16 +9,15 @@ namespace Inventory
 {
     public class InventoryController : MonoBehaviour
     {
-        [SerializeField]
-        private UIInventoryPage inventoryUI;
+        public UIInventoryPage inventoryUI;
 
-        [SerializeField]
-        private InventorySO inventoryData;
+       
+        public InventorySO inventoryData;
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
 
         
-        private void Start()
+        public void Start()
         {
             PrepareUI();
             PrepareInventoryData();
@@ -36,7 +35,7 @@ namespace Inventory
             }
         }
 
-        private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
+        public void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
             inventoryUI.ReselAllItems();
             foreach (var item in inventoryState)
@@ -78,7 +77,7 @@ namespace Inventory
            
         }
 
-        private void DropItem(int itemIndex, int quantity)
+       public void DropItem(int itemIndex, int quantity)
         {
             inventoryData.RemoveItem(itemIndex, quantity);
             inventoryUI.ResetSelection();

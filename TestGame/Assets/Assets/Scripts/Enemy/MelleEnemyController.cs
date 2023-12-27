@@ -1,4 +1,4 @@
-using UnityEngine.AI;
+п»їusing UnityEngine.AI;
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
@@ -6,53 +6,53 @@ using Unity.VisualScripting;
 public class test : MonoBehaviour
 {
     [SerializeField] private float entityDamage = 2f;
-    [SerializeField] private float damageInterval = 2f; // Интервал между ударами
-    [SerializeField] float chaseRadius = 10f; 
-    public float walkRadius = 5f;   
-    [SerializeField] float moveSpeed = 3f;   
+    [SerializeField] private float damageInterval = 2f; // РРЅС‚РµСЂРІР°Р» РјРµР¶РґСѓ СѓРґР°СЂР°РјРё
+    [SerializeField] float chaseRadius = 10f;
+    [SerializeField] float walkRadius = 5f;
+    [SerializeField] float moveSpeed = 3f;
     [SerializeField] string wallTag = "Walls";
 
-    public bool isCooldown = false;
-    public float fleeCooldownDuration = 2f;
-    public bool hasNewOppositePoint = false;
-    public bool isFleeing = false;               // Флаг для отслеживания состояния убегания
-    public float lastDamageTime;                 // Время последнего удара
-    public Transform player;                     // Ссылка на игрока
-    public NavMeshAgent agent;                   // Компонент NavMeshAgent
-    public Vector3 randomDestination;            // Случайная точка назначения
-    public bool isChasing = false;               // Флаг для отслеживания состояния преследования
-    public bool shouldFollowPlayer = false;      // Флаг для определения, следовать ли за игроком после достижения случайной точки
+    private bool isCooldown = false;
+    private float fleeCooldownDuration = 2f;
+    private bool hasNewOppositePoint = false;
+    private bool isFleeing = false;               // Р¤Р»Р°Рі РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ СѓР±РµРіР°РЅРёСЏ
+    private float lastDamageTime;                 // Р’СЂРµРјСЏ РїРѕСЃР»РµРґРЅРµРіРѕ СѓРґР°СЂР°
+    private Transform player;                     // РЎСЃС‹Р»РєР° РЅР° РёРіСЂРѕРєР°
+    private NavMeshAgent agent;                   // РљРѕРјРїРѕРЅРµРЅС‚ NavMeshAgent
+    private Vector3 randomDestination;            // РЎР»СѓС‡Р°Р№РЅР°СЏ С‚РѕС‡РєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ
+    private bool isChasing = false;               // Р¤Р»Р°Рі РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїСЂРµСЃР»РµРґРѕРІР°РЅРёСЏ
+    private bool shouldFollowPlayer = false;      // Р¤Р»Р°Рі РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ, СЃР»РµРґРѕРІР°С‚СЊ Р»Рё Р·Р° РёРіСЂРѕРєРѕРј РїРѕСЃР»Рµ РґРѕСЃС‚РёР¶РµРЅРёСЏ СЃР»СѓС‡Р°Р№РЅРѕР№ С‚РѕС‡РєРё
 
-    public void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        // Устанавливаем параметр скорости
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїР°СЂР°РјРµС‚СЂ СЃРєРѕСЂРѕСЃС‚Рё
         agent.speed = moveSpeed;
 
-        // Находим игрока по тегу "Player"
+        // РќР°С…РѕРґРёРј РёРіСЂРѕРєР° РїРѕ С‚РµРіСѓ "Player"
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Запускаем случайное блуждание
+        // Р—Р°РїСѓСЃРєР°РµРј СЃР»СѓС‡Р°Р№РЅРѕРµ Р±Р»СѓР¶РґР°РЅРёРµ
         SetNewRandomDestination();
         StartCoroutine(RandomDestinationRoutine());
     }
 
 
-    public void Update()
+    private void Update()
     {
-        if (player != null && agent.isOnNavMesh)
+        if (player != null)
         {
-            // Если достигли новой случайной точки и не преследуем игрока, возвращаемся к преследованию
-            if (!agent.isOnNavMesh && agent.remainingDistance < 0.5f && !isChasing)
+            // Р•СЃР»Рё РґРѕСЃС‚РёРіР»Рё РЅРѕРІРѕР№ СЃР»СѓС‡Р°Р№РЅРѕР№ С‚РѕС‡РєРё Рё РЅРµ РїСЂРµСЃР»РµРґСѓРµРј РёРіСЂРѕРєР°, РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ Рє РїСЂРµСЃР»РµРґРѕРІР°РЅРёСЋ
+            if (!agent.pathPending && agent.remainingDistance < 0.5f && !isChasing)
             {
                 isChasing = true;
                 shouldFollowPlayer = true;
 
-                // Если не убегаем, устанавливаем точку к игроку
+                // Р•СЃР»Рё РЅРµ СѓР±РµРіР°РµРј, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РѕС‡РєСѓ Рє РёРіСЂРѕРєСѓ
                 if (!isFleeing)
                 {
                     agent.SetDestination(player.position);
@@ -60,13 +60,13 @@ public class test : MonoBehaviour
                 }
             }
 
-            // Если следование за игроком разрешено, устанавливаем точку к игроку
+            // Р•СЃР»Рё СЃР»РµРґРѕРІР°РЅРёРµ Р·Р° РёРіСЂРѕРєРѕРј СЂР°Р·СЂРµС€РµРЅРѕ, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РѕС‡РєСѓ Рє РёРіСЂРѕРєСѓ
             if (shouldFollowPlayer)
             {
                 agent.SetDestination(player.position);
             }
 
-            // Если преследование активировано и игрок не в радиусе, возвращаемся к случайному блужданию
+            // Р•СЃР»Рё РїСЂРµСЃР»РµРґРѕРІР°РЅРёРµ Р°РєС‚РёРІРёСЂРѕРІР°РЅРѕ Рё РёРіСЂРѕРє РЅРµ РІ СЂР°РґРёСѓСЃРµ, РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ Рє СЃР»СѓС‡Р°Р№РЅРѕРјСѓ Р±Р»СѓР¶РґР°РЅРёСЋ
             if (isChasing && Vector3.Distance(transform.position, player.position) > chaseRadius)
             {
                 isChasing = false;
@@ -74,7 +74,7 @@ public class test : MonoBehaviour
                 SetNewOppositePoint();
                 agent.SetDestination(randomDestination);
 
-                // Сбрасываем флаг, чтобы можно было установить новое направление при следующем столкновении
+                // РЎР±СЂР°СЃС‹РІР°РµРј С„Р»Р°Рі, С‡С‚РѕР±С‹ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅРѕРІРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРё СЃР»РµРґСѓСЋС‰РµРј СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё
                 hasNewOppositePoint = false;
             }
         }
@@ -84,15 +84,22 @@ public class test : MonoBehaviour
         }
     }
 
-    public void SetNewRandomDestination()
+    private void SetNewRandomDestination()
     {
-
+        // РџРµСЂРµРґ СѓСЃС‚Р°РЅРѕРІРєРѕР№ РЅРѕРІРѕР№ С‚РѕС‡РєРё РЅР°Р·РЅР°С‡РµРЅРёСЏ, РїСЂРѕРІРµСЂСЏРµРј, РЅРµС‚ Р»Рё СЃС‚РµРЅС‹ РІРїРµСЂРµРґРё.
         Vector3 newPosition = RandomNavMeshLocation();
         RaycastHit hit;
-       
-        randomDestination = newPosition;
-        agent.SetDestination(randomDestination);
-        
+        if (Physics.Raycast(transform.position, newPosition - transform.position, out hit, Vector3.Distance(transform.position, newPosition)) &&
+            hit.collider.CompareTag(wallTag))
+        {
+            // Р•СЃР»Рё РµСЃС‚СЊ СЃС‚РµРЅР°, РїРѕРїСЂРѕР±СѓР№С‚Рµ СЃРЅРѕРІР° С‡РµСЂРµР· РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРјСЏ.
+            Invoke("SetNewRandomDestination", Random.Range(1f, 3f));
+        }
+        else
+        {
+            randomDestination = newPosition;
+            agent.SetDestination(randomDestination);
+        }
     }
 
     private IEnumerator RandomDestinationRoutine()
@@ -106,20 +113,15 @@ public class test : MonoBehaviour
                 isFleeing = false;
             }
 
-            // Ждем 2 секунды
+            // Р–РґРµРј 2 СЃРµРєСѓРЅРґС‹
             yield return new WaitForSeconds(2f);
         }
     }
 
-    public Vector3 RandomNavMeshLocation()
+    private Vector3 RandomNavMeshLocation()
     {
-        Vector3 randomDirection;
-        do
-        {
-            randomDirection = Random.insideUnitSphere * walkRadius;
-            randomDirection += transform.position;
-            randomDirection.Normalize();
-        } while (randomDirection == Vector3.zero);
+        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
+        randomDirection += transform.position;
 
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
@@ -127,8 +129,7 @@ public class test : MonoBehaviour
         return hit.position;
     }
 
-
-    public void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         string entityTag = other.gameObject.tag;
 
@@ -139,7 +140,7 @@ public class test : MonoBehaviour
             if (health != null)
             {
                 health.Reduce((int)entityDamage, health.currentHealth);
-                
+
                 // Update the time of the last damage
                 lastDamageTime = Time.time;
 
@@ -158,7 +159,7 @@ public class test : MonoBehaviour
         }
     }
 
-    public IEnumerator FleeCooldown()
+    private IEnumerator FleeCooldown()
     {
         // Set the cooldown flag to true
         isCooldown = true;

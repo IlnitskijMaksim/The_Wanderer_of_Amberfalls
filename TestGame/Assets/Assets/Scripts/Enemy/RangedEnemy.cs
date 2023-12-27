@@ -13,6 +13,7 @@ public class EnemyRanged : MonoBehaviour
     void Start()
     {
         shootCooldown = startShootCooldown;
+
     }
 
     void Update()

@@ -9,11 +9,6 @@ public class EntityStats : MonoBehaviour
     public float maxHealth;
 
 
-    void Awake()
-    {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-
     public void GiveDamage(float damage)
     {
         health -= damage;

@@ -29,6 +29,7 @@ public class test : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        agent.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         // Устанавливаем параметр скорости
         agent.speed = moveSpeed;

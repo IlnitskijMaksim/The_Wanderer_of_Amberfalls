@@ -11,6 +11,7 @@ public class RoomContentGenerator : MonoBehaviour
     private RoomGenerator playerRoom, defaultRoom;
 
     List<GameObject> spawnedObjects = new List<GameObject>();
+    
 
     [SerializeField]
     private GraphTest graphTest;
@@ -44,7 +45,7 @@ public class RoomContentGenerator : MonoBehaviour
         foreach (GameObject item in spawnedObjects)
         {
             if(item != null)
-                item.transform.SetParent(itemParent, false);
+                item.transform.SetParent(itemParent, false); 
         }
     }
 

@@ -69,6 +69,9 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         CreateRoomsAtDeadEnd(deadEnds, roomPositions);
 
         floorPositions.UnionWith(roomPositions);
+
+        tilemapVisualizer.PaintFloorTiles(floorPositions);
+        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
     }
 
     // Метод для асинхронної генерації кімнат (не використовується зараз)

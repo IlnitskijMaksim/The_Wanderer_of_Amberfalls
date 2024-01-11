@@ -9,6 +9,7 @@ TagManager:
   - Sword
   - SpawnPoint1
   - SpawnPoint2
+  - MinimapIcon
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - enemy
   - Weapon
   - Player
-  - 
+  - Minimap
   - 
   - 
   - 

@@ -18,29 +18,19 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenu.GameIsPaused)
         {
-            // Получаем положение курсора в мировых координатах
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // Получаем положение игрока в мировых координатах
             Vector3 playerPosition = transform.position;
 
-            // Определяем направление взгляда
-            
-            
                 if (mousePosition.x < playerPosition.x)
                 {
-                    // Если курсор слева от игрока, отзеркаливаем спрайт по горизонтальной оси
                     spriteRenderer.flipX = true;
                 }
                 else
                 {
-                    // Если курсор справа от игрока, не отзеркаливаем спрайт
                     spriteRenderer.flipX = false;
                 }
             
-       
-
-            // Обрабатываем движение
             float inputX = Input.GetAxis("Horizontal");
             float inputY = Input.GetAxis("Vertical");
 

@@ -20,7 +20,6 @@ public class ArrowBullet : MonoBehaviour
         rb.velocity = directionOther * bulletSpeed;
         Debug.Log(mousePosition + " " + transform.position + " " + rb.velocity + " " + direction + " " + directionOther);
 
-        // Вычисляем угол поворота пули
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 

@@ -36,7 +36,6 @@ public class Sword : MonoBehaviour
         animatorSword.SetTrigger("Attack");
         attackBlocked = true;
 
-        // Запускаем задержку атаки
         StartCoroutine(DelayAttack());
     }
 

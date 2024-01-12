@@ -25,18 +25,7 @@ public class RoomContentGenerator : MonoBehaviour
     // Подія для регенерації данжу
     public UnityEvent RegenerateDungeon;
 
-    private void Update()
-    {
-        // Перегенерація лабіринту при натисканні пробілу
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            foreach (var item in spawnedObjects)
-            {
-                Destroy(item);
-            }
-            RegenerateDungeon?.Invoke();
-        }
-    }
+
 
     // Генерація контенту для кімнати на основі даних про лабіринт
     public void GenerateRoomContent(DungeonData dungeonData)

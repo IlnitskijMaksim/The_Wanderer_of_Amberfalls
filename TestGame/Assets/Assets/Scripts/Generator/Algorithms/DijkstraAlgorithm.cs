@@ -11,10 +11,10 @@ public class DijkstraAlgorithm
         // Черга для незавершених вершин
         Queue<Vector2Int> unfinishedVertices = new Queue<Vector2Int>();
 
-        // Словник для зберігання відстаней до вершин від стартової вершини
+        // Зберігання відстаней до вершин від стартової вершини
         Dictionary<Vector2Int, int> distanceDictionary = new Dictionary<Vector2Int, int>();
 
-        // Словник для зберігання батьківських вершин для кожної вершини
+        // Зберігання батьківських вершин для кожної вершини
         Dictionary<Vector2Int, Vector2Int> parentDictionary = new Dictionary<Vector2Int, Vector2Int>();
 
         // Встановлення початкової відстані та батьківської вершини для стартової вершини

@@ -12,6 +12,10 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
     // Параметри генерації
     [SerializeField]
+    private int minRoomWidth = 4, minRoomHeight = 4;
+    [SerializeField]
+    private int dungeonWidth = 20, dungeonHeight = 20;
+    [SerializeField]
     private int corridorLength = 14, corridorCount = 5;
     [SerializeField]
     [Range(0.1f, 1)]
@@ -51,6 +55,9 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     // Метод для генерації данжу
     public void CorridorFirstGeneration()
     {
+        var roomsList = GenerationAlgorithm.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition,
+            new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+
         floorPositions = new HashSet<Vector2Int>();
         HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
 

@@ -64,13 +64,10 @@ namespace Inventory.UI
         // Обробник кліку на предмет
         public void OnPointerClick(PointerEventData pointerData)
         {
-            if (pointerData.button == PointerEventData.InputButton.Right)
+            if (pointerData.button == PointerEventData.InputButton.Left)
             {
+                OnItemClicked?.Invoke(this);
                 OnRigthMouseBtnClick?.Invoke(this); // Виклик події правої кнопки миші
-            }
-            else
-            {
-                OnItemClicked?.Invoke(this); // Виклик події кліку на предмет
             }
         }
 

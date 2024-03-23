@@ -9,9 +9,11 @@ public class ArrowBullet : MonoBehaviour
     private Rigidbody2D rb;
     public ToWeapon tw;
     private int destroy = 3;
+    private Vector3 previose_position;
     
     private void Start()
     {
+        previose_position = transform.position;
         rb = GetComponent<Rigidbody2D>();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - transform.position).normalized;
@@ -23,8 +25,28 @@ public class ArrowBullet : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+        
 
         Invoke("DestroyTime", 4f);
+    }
+
+    private void Update()
+    {
+        float betweenDistance = Vector3.Distance(transform.position, previose_position);
+        Debug.DrawLine(previose_position, transform.position, Color.red, 0.5f);
+        RaycastHit hit;
+
+        if (Physics.Raycast(previose_position, (Vector3) transform.position - previose_position, out hit))
+        {
+            if (hit.collider.gameObject != gameObject)
+            {
+                Debug.Log("Ray with: " + hit.collider.gameObject.name);
+                Destroy(gameObject);
+            }
+        }
+
+        previose_position = transform.position; 
+
     }
 
     void DestroyTime()
